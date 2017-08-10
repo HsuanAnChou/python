@@ -1,4 +1,4 @@
-import os, ast
+import os
 
 def display():
     print("====================")
@@ -17,7 +17,7 @@ def create():
         else:
             password = input("請輸入密碼：")
             data[account] = password
-            with open(file_name, 'w') as file:
+            with open(file_name, 'w', encoding = 'utf-8-sig') as file:
                 file.write(str(data))
             break
 
@@ -36,7 +36,7 @@ def edit():
         if account in data:
             password = input("請輸入新密碼：")
             data[account] = password
-            with open(file_name, 'w') as file:
+            with open(file_name, 'w', encoding = 'utf-8-sig') as file:
                 file.write(str(data))
             print("帳號 %s 的密碼修改成功！" %(account))
             break
@@ -48,6 +48,8 @@ def delete():
         account = input("請輸入欲刪除的帳號資料：")
         if account in data:
             del data[account]
+            with open(file_name, 'w', encoding = 'utf-8-sig') as file:
+                file.write(str(data))
             print("帳號 %s 已刪除！" %(account))
             break
         else:
@@ -57,10 +59,10 @@ def delete():
 data = {}
 file_name = 'pwd.txt'
 if os.path.exists(file_name):
-    with open(file_name, 'r') as file:
+    with open(file_name, 'r', encoding = 'utf-8-sig') as file:
         data = eval(file.read())
 else:
-    f = open(file_name,'w')
+    f = open(file_name,'w', encoding = 'utf-8-sig')
     f.write(str(data))
 
 options = {
