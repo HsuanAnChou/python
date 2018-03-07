@@ -1,4 +1,4 @@
-import os
+import os, io, sys, utf8
 
 def display():
     print("====================")
@@ -55,31 +55,34 @@ def delete():
         else:
             print("輸入的帳號不存在")
 
+def get_options():
+    options[1] = create
+    options[2] = show
+    options[3] = edit
+    options[4] = delete
+
 # main
-data = {}
-file_name = 'pwd.txt'
-if os.path.exists(file_name):
-    with open(file_name, 'r', encoding = 'utf-8-sig') as file:
-        data = eval(file.read())
-else:
-    f = open(file_name,'w', encoding = 'utf-8-sig')
-    f.write(str(data))
+if __name__ == '__main__':
+    utf8.setutf8()
+    data = {}
+    options = {}
+    get_options()
+    file_name = 'pwd.txt'
+    if os.path.exists(file_name):
+        with open(file_name, 'r', encoding = 'utf-8-sig') as file:
+            data = eval(file.read())
+    else:
+        f = open(file_name,'w', encoding = 'utf-8-sig')
+        f.write(str(data))
 
-options = {
-1:create,
-2:show,
-3:edit,
-4:delete
-}
-
-while True:
-    display()
-    action = input("請輸入欲執行之動作代碼：")
-    if action.isdigit():
-        action_code = int(action)
-        if action_code in options:
-            options[action_code]()
+    while True:
+        display()
+        action = input("請輸入欲執行之動作代碼：")
+        if action.isdigit():
+            action_code = int(action)
+            if action_code in options:
+                options[action_code]()
+            else:
+                break
         else:
             break
-    else:
-        break

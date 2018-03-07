@@ -1,6 +1,11 @@
 from time import sleep
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
+import sys
+sys.path.append('/Users/apple/Documents/GitHub/python/practice')
+import utf8
+
+utf8.setutf8()
 
 searching_word = input("請輸入欲查詢之關鍵字: ")
 
